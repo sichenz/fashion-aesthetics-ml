@@ -1,6 +1,6 @@
 # Fast Fashion Stable Diffusion Framework
 
-This project implements a machine learning approach to augment the fashion design process
+This project implements a machine learning approach that (a) predicts how consumers rate the aesthetics of a given design (for screening purposes) and (b) generates new, realistic product designs that are both innovative and appealing to consumers.
 
 ## Overview
 
