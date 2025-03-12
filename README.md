@@ -13,6 +13,9 @@ This system combines three key components:
 
 ### Environment Setup
 
-1. Create the overlay file and set up the environment:
+1. Create and set up the environment:
 ```bash
-sbatch sbatch_setup_env.sh
+conda create -n fashion_env python=3.10
+conda activate fashion_env
+pip install -r requirements.txt
+```
