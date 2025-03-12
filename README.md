@@ -1,4 +1,4 @@
-# Fashion Aesthetic Design ML
+# Fast Fashion Stable Diffusion Framework
 
 This project implements a machine learning approach to augment the fashion design process
 
