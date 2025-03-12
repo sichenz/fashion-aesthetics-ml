@@ -1,0 +1,49 @@
+# configs/config.yaml
+project:
+  name: "fashion-aesthetics-ml"
+  seed: 42
+  
+paths:
+  raw_data: "./data/raw"
+  processed_data: "./data/processed"
+  embeddings: "./data/embeddings"
+  checkpoints: "./checkpoints"
+  
+data:
+  image_size: 512
+  deepfashion_url: "https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html"
+  fashiongen_url: "https://github.com/xthan/fashion-gen"
+  num_workers: 4
+  
+encoder:
+  model_name: "convnext_large"
+  pretrained: true
+  embedding_dim: 768
+  batch_size: 32
+  epochs: 50
+  lr: 1e-4
+  scheduler: "cosine"
+  
+predictor:
+  hidden_dims: [512, 256, 128]
+  dropout: 0.2
+  batch_size: 64
+  epochs: 30
+  lr: 3e-4
+  
+generator:
+  model_id: "stabilityai/stable-diffusion-3-medium"
+  lora_rank: 16
+  train_batch_size: 8
+  max_train_steps: 3000
+  gradient_accumulation_steps: 4
+  learning_rate: 1e-5
+  lr_scheduler: "constant"
+  
+evaluation:
+  metrics: ["mae", "r2", "pearson"]
+  fid_batch_size: 32
+  
+inference:
+  num_samples: 5
+  guidance_scale: 7.5

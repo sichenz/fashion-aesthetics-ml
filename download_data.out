@@ -1,0 +1,164 @@
+WARNING: Could not find any nv files on this host!
+Could not load bitsandbytes native library: /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.32' not found (required by /ext3/miniforge3/envs/fashion_env/lib/python3.10/site-packages/bitsandbytes/libbitsandbytes_cpu.so)
+Traceback (most recent call last):
+  File "/ext3/miniforge3/envs/fashion_env/lib/python3.10/site-packages/bitsandbytes/cextension.py", line 85, in <module>
+    lib = get_native_library()
+  File "/ext3/miniforge3/envs/fashion_env/lib/python3.10/site-packages/bitsandbytes/cextension.py", line 72, in get_native_library
+    dll = ct.cdll.LoadLibrary(str(binary_path))
+  File "/ext3/miniforge3/envs/fashion_env/lib/python3.10/ctypes/__init__.py", line 452, in LoadLibrary
+    return self._dlltype(name)
+  File "/ext3/miniforge3/envs/fashion_env/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.32' not found (required by /ext3/miniforge3/envs/fashion_env/lib/python3.10/site-packages/bitsandbytes/libbitsandbytes_cpu.so)
+Downloading datasets...
+Starting dataset setup process...
+Aesthetic ratings already downloaded.
+
+IMPORTANT: You need to manually download the DeepFashion dataset:
+1. Go to: https://drive.google.com/drive/folders/0B7EVK8r0v71pWGplNFhjc01NbzQ?resourcekey=0-2s7M82p8Bn7riqxWVlgctw
+2. Navigate to the 'img' folder
+3. Download 'img_highres.zip' (high-resolution images)
+4. Navigate back to the main folder and download:
+   - 'Anno_coarse' folder (coarse annotations)
+   - 'Anno_fine' folder (fine-grained annotations)
+   - 'Eval' folder (evaluation protocols)
+   - 'README.txt'
+5. Create the following structure in data/raw/deepfashion:
+   deepfashion/
+   ├── Anno_coarse/
+   ├── Anno_fine/
+   ├── Eval/
+   ├── Img/ (extract img_highres.zip here)
+   └── README.txt
+6. After downloading, run the preprocessing script
+
+
+IMPORTANT: You need to manually download the DeepFashion2 dataset:
+1. Go to: https://drive.google.com/drive/folders/125F48fsMBz2EF0Cpqk6aaHet5VH399Ok
+2. Download the following files as shown in the screenshots:
+   - train.zip (9.9 GB)
+   - validation.zip (1.69 GB)
+   - test.zip (3.11 GB)
+   - json_for_validation.zip (14.2 MB)
+3. Place the downloaded files in: data/raw/deepfashion2
+4. Extract the files to create the following structure:
+   deepfashion2/
+   ├── train/
+   ├── validation/
+   ├── test/
+   └── json_for_validation/
+5. After downloading, run the preprocessing script
+
+
+IMPORTANT: You need to manually download the Fashion200k dataset:
+1. Go to: https://drive.google.com/drive/folders/0B4Eo9mft9jwoamlYWFZBSHFzV3c?resourcekey=0-2s7M82p8Bn7riqxWVlgctw
+2. Based on the screenshot, you should download:
+   - image_urls.txt (47.9 MB)
+   - 'labels' folder
+   - 'detection' folder
+3. Place the downloaded files in: data/raw/fashion200k
+4. For the image_urls.txt file, you can use a script to download images during preprocessing
+5. After downloading, run the preprocessing script
+
+
+IMPORTANT: You need to manually download the Re-PolyVore dataset:
+1. Go to: https://hkaidlab-my.sharepoint.com/personal/xingxingzou_aidlab_hk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fxingxingzou%5Faidlab%5Fhk%2FDocuments%2FAiDLab%20%2D%20fAshIon%20TEAM%20%2D%20DATA%2FRe%2DPolyVore%2Ezip
+2. Download Re-PolyVore.zip
+3. Extract the file to: data/raw/polyvore
+4. After downloading, run the preprocessing script
+
+
+IMPORTANT: You need to manually download the A100 dataset:
+1. Go to: https://polyuit-my.sharepoint.com/personal/xingxzou_polyu_edu_hk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fxingxzou%5Fpolyu%5Fedu%5Fhk%2FDocuments%2FfAshIon%2DDATA%2F%E3%80%90fAshIon%E3%80%91A100%2Ezip
+2. Download 【fAshIon】A100.zip
+3. Extract the file to: data/raw/a100
+4. After downloading, run the preprocessing script
+
+
+IMPORTANT: You need to manually download the Evaluation3 dataset:
+1. Go to: https://polyuit-my.sharepoint.com/personal/xingxzou_polyu_edu_hk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fxingxzou%5Fpolyu%5Fedu%5Fhk%2FDocuments%2FfAshIon%2DDATA%2F%E3%80%90fAshIon%E3%80%91EVALUATION3%2FEvaluation3%2Ezip
+2. Download Evaluation3.zip
+3. Extract the file to: data/raw/evaluation3
+4. This dataset contains outfit aesthetic evaluations labeled as Good/Normal/Bad
+5. After downloading, run the preprocessing script
+
+
+IMPORTANT: You need to manually download the Outfit4You dataset:
+1. Go to: https://polyuit-my.sharepoint.com/personal/xingxzou_polyu_edu_hk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fxingxzou%5Fpolyu%5Fedu%5Fhk%2FDocuments%2FfAshIon%2DDATA%2F%E3%80%90fAshIon%E3%80%91O4U%2FOutfit4You%2Ezip
+2. Download Outfit4You.zip
+3. Extract the file to: data/raw/outfit4you
+4. After downloading, run the preprocessing script
+
+
+IMPORTANT: You need to manually download the Print14 dataset:
+1. Go to: https://polyuit-my.sharepoint.com/personal/xingxzou_polyu_edu_hk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fxingxzou%5Fpolyu%5Fedu%5Fhk%2FDocuments%2FfAshIon%2DDATA%2F%E3%80%90fAshIon%E3%80%91Print14%2Erar
+2. Download 【fAshIon】Print14.rar
+3. Extract the file to: data/raw/print14
+4. This dataset contains 14 types of fashion prints: stripe, dotted, allover, camouflage, checks, abstract, floral, etc.
+5. After downloading, run the preprocessing script
+
+
+IMPORTANT: You need to manually download the Type-aware dataset:
+1. Go to: https://hkaidlab-my.sharepoint.com/personal/xingxingzou_aidlab_hk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fxingxingzou%5Faidlab%5Fhk%2FDocuments%2FAiDLab%20%2D%20fAshIon%20TEAM%20%2D%20DATA%2FRe%2DTypeAware%2Ezip
+2. Download Re-TypeAware.zip
+3. Extract the file to: data/raw/typeaware
+4. This dataset contains fashion items organized into 20 categories including:
+   Tops, Skirts, Pants, Outerwear, Dresses, Jumpsuits, Shoes, Bags, etc.
+5. After downloading, run the preprocessing script
+
+
+IMPORTANT: You need to manually download the fashionDA dataset:
+1. Go to: https://hkaidlab-my.sharepoint.com/personal/xingxingzou_aidlab_hk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fxingxingzou%5Faidlab%5Fhk%2FDocuments%2FAiDLab%20%2D%20fAshIon%20TEAM%20%2D%20DATA%2F%E3%80%90AiDLab%E3%80%91fAshIon%2DDA%2Erar
+2. Download 【AiDLab】fAshIon-DA.rar
+3. Extract the file to: data/raw/fashionda
+4. This is a cross-domain dataset with three formats of fashion items:
+   - Product images
+   - Sketches
+   - Drawings
+5. After downloading, run the preprocessing script
+
+
+==================================================
+FASHION DATASET DOWNLOAD INSTRUCTIONS SUMMARY
+==================================================
+This script has created instruction files for all required datasets.
+Due to access restrictions and large file sizes, you need to manually download most datasets.
+
+Recommended datasets to prioritize for your research:
+1. DeepFashion or DeepFashion2 - Large, well-annotated datasets with attributes
+2. Evaluation3 - Contains outfit aesthetic ratings (good/normal/bad)
+3. Print14 - For texture and pattern analysis
+4. TypeAware - Fashion items organized into categories
+
+After downloading the datasets, run the preprocessing script to prepare them for training.
+==================================================
+
+Preprocessing datasets...
+Processing DeepFashion dataset...
+Warning: data/raw/deepfashion/img does not exist, skipping DeepFashion
+Processing FashionGen dataset...
+Warning: data/raw/fashiongen/images does not exist, skipping FashionGen
+No images found. Please check dataset paths.
+Training encoder...
+Traceback (most recent call last):
+  File "/scratch/sz4972/fashion-aesthetics-ml/main.py", line 86, in <module>
+    main(args)
+  File "/scratch/sz4972/fashion-aesthetics-ml/main.py", line 41, in main
+    encoder_path = train_encoder(args.config)
+  File "/scratch/sz4972/fashion-aesthetics-ml/train_encoder.py", line 24, in train_encoder
+    train_loader, val_loader = get_dataloaders(config)
+  File "/scratch/sz4972/fashion-aesthetics-ml/utils/data_utils.py", line 100, in get_dataloaders
+    train_dataset = FashionDataset(
+  File "/scratch/sz4972/fashion-aesthetics-ml/utils/data_utils.py", line 42, in __init__
+    self.metadata = pd.read_csv(meta_path)
+  File "/ext3/miniforge3/envs/fashion_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/ext3/miniforge3/envs/fashion_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/ext3/miniforge3/envs/fashion_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/ext3/miniforge3/envs/fashion_env/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+  File "/ext3/miniforge3/envs/fashion_env/lib/python3.10/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: 'data/processed/train_metadata.csv'

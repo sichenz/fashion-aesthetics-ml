@@ -1,0 +1,6 @@
+Please download DeepFashion2 dataset from: https://drive.google.com/drive/folders/125F48fsMBz2EF0Cpqk6aaHet5VH399Ok
+Files needed:
+- train.zip (9.9 GB)
+- validation.zip (1.69 GB)
+- test.zip (3.11 GB)
+- json_for_validation.zip (14.2 MB)

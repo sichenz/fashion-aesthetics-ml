@@ -1,0 +1,5 @@
+Please download Fashion200k dataset from: https://drive.google.com/drive/folders/0B4Eo9mft9jwoamlYWFZBSHFzV3c?resourcekey=0-2s7M82p8Bn7riqxWVlgctw
+Items needed:
+- image_urls.txt (47.9 MB)
+- 'labels' folder
+- 'detection' folder

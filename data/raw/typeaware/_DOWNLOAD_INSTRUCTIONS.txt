@@ -1,0 +1,4 @@
+Please download Type-aware dataset from: https://hkaidlab-my.sharepoint.com/personal/xingxingzou_aidlab_hk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fxingxingzou%5Faidlab%5Fhk%2FDocuments%2FAiDLab%20%2D%20fAshIon%20TEAM%20%2D%20DATA%2FRe%2DTypeAware%2Ezip
+File needed: Re-TypeAware.zip
+This dataset contains fashion items organized into 20 categories.
+It will be valuable for your type-based categorization model.

@@ -1,0 +1,4 @@
+Please download fashionDA dataset from: https://hkaidlab-my.sharepoint.com/personal/xingxingzou_aidlab_hk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fxingxingzou%5Faidlab%5Fhk%2FDocuments%2FAiDLab%20%2D%20fAshIon%20TEAM%20%2D%20DATA%2F%E3%80%90AiDLab%E3%80%91fAshIon%2DDA%2Erar
+File needed: 【AiDLab】fAshIon-DA.rar
+Note: You need RAR extraction software to unpack this file.
+This is a cross-domain dataset with product images, sketches, and drawings.
