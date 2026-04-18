@@ -1,93 +1,116 @@
-# Fast Fashion Stable Diffusion Framework
+# Fashion Aesthetics ML
 
-This project implements a machine learning approach that (a) predicts how consumers rate the aesthetics of a given design (for screening purposes) and (b) generates new, realistic product designs that are both innovative and appealing to consumers.
+A machine learning framework that **(a)** predicts consumer aesthetic ratings for product screening and **(b)** generates novel product designs aligned with consumer preference signals.
 
-## Overview
+Built for **Apple Silicon** (M3 Pro / M-series) — runs entirely on your Mac GPU.
 
-This system combines three key components:
-1. **Encoder**: A deep learning model that transforms fashion images into a compact embedding space
-2. **Predictor**: A model that predicts aesthetic ratings from image embeddings
-3. **Generator**: A fine-tuned Stable Diffusion model that generates new fashion designs with desired aesthetic properties
+## Architecture
 
 ```
-fashion-aesthetics-ml/
-├── data/
-│   ├── raw/                 # Raw downloaded datasets
-│   ├── processed/           # Processed images and metadata
-│   └── embeddings/          # Stored embeddings
-├── models/
-│   ├── encoder.py           # Encoder model
-│   ├── predictor.py         # Aesthetic predictor model
-│   └── generator.py         # SD-based generator
-├── utils/
-│   ├── data_utils.py        # Data loading and processing
-│   ├── training_utils.py    # Training helpers 
-│   └── evaluation_utils.py  # Evaluation metrics
-├── configs/
-│   └── config.yaml          # Configuration parameters
-├── scripts/
-│   ├── download_data.sh     # Data downloading script
-│   ├── preprocess_data.py   # Data preprocessing
-│   └── train_*.sh           # Training scripts
-├── main.py                  # Main entry point
-├── train_encoder.py         # Encoder training
-├── train_predictor.py       # Predictor training
-├── train_generator.py       # Generator fine-tuning
-└── inference.py             # Generation and prediction scripts
+┌─────────────────────────────────────────────────────────────┐
+│  Phase 1: Aesthetic Score Predictor                         │
+│  CLIP ViT-B/32 (frozen) → MLP Head → Score (1-10)          │
+│  Trained on LAION-Aesthetics V2 (real human ratings)        │
+├─────────────────────────────────────────────────────────────┤
+│  Phase 2: Aesthetic-Conditioned Generator                   │
+│  Stable Diffusion 1.5 + LoRA fine-tuning                    │
+│  Conditioned on aesthetic quality via text prompts           │
+├─────────────────────────────────────────────────────────────┤
+│  Phase 3: Closed-Loop Design Screening                      │
+│  Generate → Score → Rank → Select top designs               │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-## Setup
+## Quick Start
 
-### Environment Setup
+### 1. Environment Setup
 
-1. Create and set up the environment:
 ```bash
-conda create -n fashion_env python=3.10
-conda activate fashion_env
+conda create -n fashion python=3.11
+conda activate fashion
 pip install -r requirements.txt
 ```
 
-### Data Preparation
-1. Download datasets:
-   ```bash
-   sbatch sbatch_download_data.sh
-   ```
-2. Preprocess datasets:
-   ```bash
-   sbatch sbatch_preprocess_data.sh
-   ```
+### 2. Train the Aesthetic Predictor (~15 min on M3 Pro)
 
-### Training
-Train each component separately:
 ```bash
-sbatch sbatch_train_encoder.sh  # Train encoder
-sbatch sbatch_train_predictor.sh  # Train predictor
-sbatch sbatch_train_generator.sh  # Train generator
+python train_predictor.py
 ```
 
-### Evaluation and Inference
-Evaluate model performance and generate new fashion designs:
+This will:
+- Auto-download LAION-Aesthetics data (or fall back to Fashion-MNIST)
+- Train a CLIP-based aesthetic score predictor
+- Save the best model to `checkpoints/best_predictor.pt`
+- Generate evaluation plots in `outputs/predictor/`
+
+### 3. Fine-tune the Generator (~2-4 hrs on M3 Pro)
+
 ```bash
-sbatch sbatch_evaluate.sh  # Evaluate models
-sbatch sbatch_inference.sh  # Generate new designs
+python train_generator.py
 ```
 
-## Advanced Usage
+This fine-tunes Stable Diffusion 1.5 with LoRA adapters on fashion images,
+conditioned on aesthetic quality descriptors.
 
-### Customizing Generation
-You can generate custom designs by modifying the prompt:
+### 4. Generate & Screen Designs
+
 ```bash
-python inference.py --num_samples 5 --target_rating 4.5 --style casual --color blue
+# Generate designs targeting high aesthetic scores
+python generate.py --target_score 8.0 --num_samples 4
+
+# With a specific prompt
+python generate.py --prompt "elegant minimalist handbag" --target_score 7.5
+
+# Custom guidance scale
+python generate.py --prompt "casual streetwear sneaker" --guidance_scale 9.0
 ```
 
-### Model Tuning
-To fine-tune the models, modify `configs/config.yaml` or pass parameters directly to the training scripts:
+### 5. Evaluate the Predictor
+
 ```bash
-python main.py --mode train_encoder --batch_size 64 --epochs 30 --lr 2e-4 --embedding_dim 1024
+python evaluate.py
 ```
+
+## Project Structure
+
+```
+fashion-aesthetics-ml/
+├── configs/config.yaml              # All hyperparameters
+├── models/
+│   ├── aesthetic_predictor.py       # CLIP + MLP predictor
+│   └── aesthetic_generator.py       # SD 1.5 + LoRA generator
+├── utils/
+│   ├── device.py                    # MPS/CUDA/CPU auto-detection
+│   ├── data_utils.py                # HuggingFace data pipeline
+│   └── evaluation_utils.py          # Metrics & visualization
+├── train_predictor.py               # Train aesthetic predictor
+├── train_generator.py               # Fine-tune SD 1.5 with LoRA
+├── generate.py                      # Generate + score + rank designs
+├── evaluate.py                      # Evaluate predictor performance
+└── requirements.txt                 # Mac-compatible dependencies
+```
+
+## Hardware Requirements
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| RAM       | 16 GB   | 18+ GB      |
+| GPU       | Apple M1 | Apple M3 Pro+ |
+| Disk      | 10 GB   | 20 GB       |
+
+Also works on NVIDIA GPUs (CUDA) — the code auto-detects the best device.
+
+## Key Metrics
+
+The aesthetic predictor is evaluated on:
+- **MAE** — Mean Absolute Error
+- **RMSE** — Root Mean Squared Error
+- **R²** — Coefficient of Determination
+- **Pearson r** — Linear correlation
+- **Spearman ρ** — Rank correlation
 
 ## Citation
-If you use this code, please cite the original paper:
+
 ```bibtex
 @article{burnap2022product,
   title={Product Aesthetic Design: A Machine Learning Augmentation},
@@ -96,14 +119,3 @@ If you use this code, please cite the original paper:
   year={2022}
 }
 ```
-
-## Running on NYU HPC Cluster
-
-To run this project on the NYU HPC cluster, please refer to the CLUSTER.md
-
-## Technologies Used
-- **ConvNeXT-Large** for the encoder backbone
-- **Stable Diffusion 3** with LoRA fine-tuning for generation
-- **Progressive training and adversarial components** for enhanced performance
-- **SAM (Segment Anything Model)** for image mask generation
-
