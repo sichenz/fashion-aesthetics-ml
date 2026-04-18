@@ -59,7 +59,7 @@ conditioned on aesthetic quality descriptors.
 python generate.py --target_score 8.0 --num_samples 4
 
 # With a specific prompt
-python generate.py --prompt "elegant minimalist handbag" --target_score 7.5
+python generate.py --prompt "elegant minimalist handbag" --target_score 7.5 --num_samples 1 #default num_samples=4
 
 # Custom guidance scale
 python generate.py --prompt "casual streetwear sneaker" --guidance_scale 9.0

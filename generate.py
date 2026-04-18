@@ -139,8 +139,20 @@ def generate_and_screen(
     out_dir = Path(config["paths"]["outputs_dir"]) / "generated"
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    # Create a clean filename from the prompt
+    if prompt:
+        import re
+        fillers = {"a", "an", "the", "beautiful", "high", "quality", "fashion", "product", "photograph", "studio", "lighting"}
+        words = [w.lower() for w in re.findall(r'\w+', prompt) if w.lower() not in fillers]
+        base_name = "_".join(words)[:40]
+        if not base_name:
+            base_name = "design"
+    else:
+        base_name = "design"
+
     for i, (img, sc) in enumerate(ranked):
-        img.save(out_dir / f"design_{i+1}_score_{sc:.2f}.png")
+        filename = f"{base_name}_score_{sc:.2f}.png" if len(ranked) == 1 else f"{base_name}_{i+1}_score_{sc:.2f}.png"
+        img.save(out_dir / filename)
 
     plot_generated_gallery(
         images_ranked, scores_ranked,
